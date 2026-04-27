@@ -40,7 +40,7 @@ export default function Projects() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6">
-      <h2 className="text-xl font-semibold mb-4">Proyectos</h2>
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">Proyectos</h2>
 
       {/* 🔥 Crear Proyecto */}
       <CreateProject />
@@ -51,14 +51,14 @@ export default function Projects() {
           <div
             key={p.id}
             onClick={() => setSelectedProject(p.id)}
-            className={`flex justify-between items-center px-4 py-2 rounded-lg border cursor-pointer transition
+            className={`flex justify-between items-center px-4 py-3 rounded-xl border cursor-pointer transition-all shadow-sm
               ${
                 selectedProject === p.id
-                  ? "bg-blue-50 border-blue-400"
+                  ? "bg-blue-50 border-blue-400 ring-1 ring-blue-400"
                   : "bg-white border-gray-200 hover:bg-gray-50"
               }`}
           >
-            <span className="text-sm font-medium">{p.name}</span>
+            <span className="text-sm font-semibold text-gray-700">{p.name}</span>
 
             <button
               onClick={(e) => {
@@ -67,7 +67,7 @@ export default function Projects() {
                   deleteMutation.mutate(p.id);
                 }
               }}
-              className="text-red-500 text-xs hover:underline"
+              className="p-1 hover:bg-red-50 rounded-full transition-colors"
             >
               ❌
             </button>
@@ -75,9 +75,23 @@ export default function Projects() {
         ))}
       </div>
 
-      {/* 🔥 Kanban */}
+      {/* 🔥 Sección de Tareas con Nota de Ayuda */}
       {selectedProject && (
-        <div className="mt-8">
+        <div className="mt-10 animate-in fade-in duration-500">
+          
+          {/* 👇 NOTA DE UX: Justo antes del Kanban 👇 */}
+          <div className="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-xl mb-6 shadow-sm">
+            <div className="flex items-center gap-2">
+              <span className="text-lg">💡</span>
+              <p className="text-sm font-bold text-amber-800 uppercase tracking-tight">
+                Nota:
+              </p>
+            </div>
+            <p className="text-sm text-amber-700 mt-1 ml-7">
+              Para cambiar el estado de una tarea, simplemente <span className="font-bold underline">arrástrela</span> a la columna que crea indicada. Los cambios se guardarán automáticamente.
+            </p>
+          </div>
+
           <Tasks projectId={selectedProject} />
         </div>
       )}
