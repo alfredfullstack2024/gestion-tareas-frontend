@@ -2,13 +2,12 @@ import axios from "axios";
 
 /**
  * Centralizo la configuración de Axios para no repetir la URL base en cada petición.
- * * TODO: Mover el string a una variable de entorno (VITE_API_URL o similar)
- * para facilitar el despliegue entre ambientes (dev, staging, prod).
+  * para facilitar el despliegue entre ambientes (dev, staging, prod).
  */
 const api = axios.create({
   baseURL: "http://localhost:3000/api",
   // Implementaré el timeout y los headers de Auth aquí una vez
-  // definamos la política de persistencia del token.
+  // que defini la política de persistencia del token.
 });
 
 /**
